@@ -1,6 +1,6 @@
 # API Findings: JSONPlaceholder
 
-Testers (Group 5): ELisa, Nurfarhana, Ammar, Ikmal, Shervona, Nureen
+Testers (Group 5): Elisa, Nurfarhana, Ammar, Ikmal, Shervona, Nureen
 Date: 26 October 2026
 
 Record what the server actually returned for each route. A value
@@ -76,17 +76,14 @@ Response body:
 
 ## Notes
 
-- Every route returned `Content-Type: application/json; charset=utf-8`,
-  not plain `application/json` as in Part 1. A test that asserts only
-  `application/json` with `==` fails against this server.
+- Content-Type for every route is `application/json; charset=utf-8`,
+  not plain `application/json` as used in Part 1. Tests must assert
+  the full value or they will fail.
 - POST /posts returned 201 and a new id (101), but a follow-up
-  GET /posts/101 returned 404. The server accepted the request without
-  actually saving the post.
+  GET /posts/101 returned 404. The post was never actually saved.
 - DELETE /posts/1 returned 200, but a follow-up GET /posts/1 still
-  returned 200. The server accepted the request without actually
-  deleting the post.
-- Conclusion: JSONPlaceholder returns success codes for POST and
-  DELETE but does not change any data on the server. A test that
-  checks only the status code would pass even though the operation
-  never happened. To confirm a write, the resource must be read back
-  afterwards.
+  returned 200. The post was never actually deleted.
+- Conclusion: JSONPlaceholder accepts POST and DELETE and returns
+  success codes, but does not change any data on the server. A test
+  that checks only the status code would wrongly pass. Confirming a
+  write requires reading the resource back afterwards.

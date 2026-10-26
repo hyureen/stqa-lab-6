@@ -13,7 +13,6 @@ BASE_URL = "https://jsonplaceholder.typicode.com"
 
 
 def test_get_single_post():
-    """...keep docstring..."""
     response = requests.get(f"{BASE_URL}/posts/1")
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json; charset=utf-8"
@@ -27,7 +26,6 @@ def test_get_single_post():
 
 
 def test_get_all_posts():
-    """...keep docstring..."""
     response = requests.get(f"{BASE_URL}/posts")
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json; charset=utf-8"
@@ -40,7 +38,6 @@ def test_get_all_posts():
 
 
 def test_create_post():
-    """...keep docstring..."""
     payload = {"title": "foo", "body": "bar", "userId": 1}
     response = requests.post(f"{BASE_URL}/posts", json=payload)
     assert response.status_code == 201
@@ -54,7 +51,6 @@ def test_create_post():
 
 
 def test_delete_post():
-    """...keep docstring..."""
     response = requests.delete(f"{BASE_URL}/posts/1")
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json; charset=utf-8"
